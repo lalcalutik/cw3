@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="create-notification_tasks-table.1" author="lalcalutik">
+
+        <preConditions>
+            <not>
+                <tableExists tableName="notification_tasks"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="notification_tasks">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="text" type="VARCHAR(4096)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="chat_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_time" type="DATETIME(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex tableName="notification_tasks" indexName="IDX_NOTIFICATION_TASKS_DATE_TIME">
+            <column name="date_time"/>
+        </createIndex>
+
+    </changeSet>
+
+</databaseChangeLog>
